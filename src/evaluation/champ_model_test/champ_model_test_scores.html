@@ -1,0 +1,74 @@
+
+    <html>
+      <head>
+        <title>Champion Model Test Scores</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 24px; }
+          h1, h2 { margin-bottom: 8px; }
+          table { border-collapse: collapse; width: 100%; margin-bottom: 24px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f4f4f4; }
+        </style>
+      </head>
+      <body>
+        <h1>Champion Model Test Evaluation</h1>
+        <p><b>Selection Criterion:</b> Lowest AMSE (Average MSE from 5-fold stratified CV)</p>
+        <h2>Champion Summary</h2>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Champion_Model</th>
+      <th>AMSE</th>
+      <th>Test_MSE</th>
+      <th>Test_RMSE</th>
+      <th>Test_MAE</th>
+      <th>Test_R2</th>
+      <th>Test_Adjusted_R2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>XGBoostRegressor</td>
+      <td>2.062734e+07</td>
+      <td>1.817822e+07</td>
+      <td>4263.592427</td>
+      <td>2428.381333</td>
+      <td>0.882909</td>
+      <td>0.879292</td>
+    </tr>
+  </tbody>
+</table>
+        <h2>Champion Hyperparameters</h2>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>hyperparameter</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>colsample_bytree</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td>learning_rate</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>max_depth</td>
+      <td>3.00</td>
+    </tr>
+    <tr>
+      <td>n_estimators</td>
+      <td>200.00</td>
+    </tr>
+    <tr>
+      <td>subsample</td>
+      <td>0.80</td>
+    </tr>
+  </tbody>
+</table>
+      </body>
+    </html>
+    

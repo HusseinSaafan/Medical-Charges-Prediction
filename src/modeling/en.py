@@ -1,4 +1,4 @@
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import ElasticNet
 
 from src.utils.helpers import (
     build_train_metrics_payload,
@@ -9,18 +9,19 @@ from src.utils.helpers import (
 )
 
 
-def run_linear_regression() -> dict:
+def run_elastic_net() -> dict:
     X_train, y_train = load_training_data()
 
-    model = LinearRegression()
+    model = ElasticNet(random_state=42, max_iter=10000)
     param_grid = {
-        "fit_intercept": [True, False],
+        "alpha": [0.001, 0.01, 0.1, 1.0, 10.0],
+        "l1_ratio": [0.1, 0.3, 0.5, 0.7, 0.9],
     }
 
     grid, _, _ = run_stratified_grid_search(
         model=model,
         param_grid=param_grid,
-        model_name="linear_regression",
+        model_name="elastic_net",
     )
 
     best_model = grid.best_estimator_
@@ -31,7 +32,7 @@ def run_linear_regression() -> dict:
     amse = -float(grid.best_score_)
 
     payload = build_train_metrics_payload(
-        model_name="LinearRegression",
+        model_name="ElasticNet",
         num_samples=len(X_train),
         num_features=X_train.shape[1],
         train_metrics=train_metrics,
@@ -39,11 +40,11 @@ def run_linear_regression() -> dict:
         best_params=grid.best_params_,
     )
 
-    save_train_metrics(payload, "linear_regression_train_metrics.txt")
+    save_train_metrics(payload, "elastic_net_train_metrics.txt")
 
     return {
-        "model_key": "lr",
-        "model_name": "LinearRegression",
+        "model_key": "en",
+        "model_name": "ElasticNet",
         "estimator": best_model,
         "AMSE": amse,
         "best_params": grid.best_params_,
@@ -52,4 +53,4 @@ def run_linear_regression() -> dict:
 
 
 if __name__ == "__main__":
-    run_linear_regression()
+    run_elastic_net()

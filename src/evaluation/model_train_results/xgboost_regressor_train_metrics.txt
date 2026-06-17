@@ -1,0 +1,11 @@
+dataset: train_encoded.csv
+model: XGBoostRegressor
+timestamp: 2026-06-17T16:42:07
+num_samples: 1070
+num_features: 8
+MSE: 16904878.31635203
+RMSE: 4111.554245823838
+MAE: 2255.9312865722104
+R2: 0.8828763659503951
+AMSE: 20627344.291787036
+best_params: {'colsample_bytree': 1.0, 'learning_rate': 0.03, 'max_depth': 3, 'n_estimators': 200, 'subsample': 0.8}
