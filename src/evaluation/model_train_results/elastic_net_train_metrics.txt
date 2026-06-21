@@ -1,6 +1,6 @@
 dataset: train_encoded.csv
 model: ElasticNet
-timestamp: 2026-06-17T16:39:46
+timestamp: 2026-06-21T12:15:17
 num_samples: 1070
 num_features: 8
 MSE: 37280410.85293097

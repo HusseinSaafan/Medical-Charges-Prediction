@@ -1,3 +1,4 @@
+import pickle
 from pathlib import Path
 
 import pandas as pd
@@ -10,6 +11,16 @@ from src.utils.config import PROJECT_ROOT, log
 from src.utils.helpers import compute_regression_metrics, load_test_data
 
 CHAMP_TEST_DIR = PROJECT_ROOT / "src" / "evaluation" / "champ_model_test"
+MODELS_DIR = PROJECT_ROOT / "artifacts" / "models"
+
+
+def _save_model_pickle(model, filename: str) -> Path:
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    model_path = MODELS_DIR / filename
+    with model_path.open("wb") as file_obj:
+        pickle.dump(model, file_obj)
+    log("Saved model pickle to:", model_path)
+    return model_path
 
 
 def _save_champ_test_html(champ_result: dict, test_metrics: dict, output_dir: Path) -> Path:
@@ -73,6 +84,7 @@ def run_champion_selection() -> dict:
     ]
 
     champ = min(candidates, key=lambda item: item["AMSE"])
+    champ_model_path = _save_model_pickle(champ["estimator"], "champ.pkl")
 
     log("Champion model selected:", champ["model_name"])
     log("Champion AMSE:", champ["AMSE"])
@@ -91,6 +103,7 @@ def run_champion_selection() -> dict:
         "champion": champ,
         "test_metrics": test_metrics,
         "report_path": report_path,
+        "champ_model_path": champ_model_path,
     }
 
 

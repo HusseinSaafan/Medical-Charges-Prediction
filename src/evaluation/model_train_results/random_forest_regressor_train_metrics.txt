@@ -1,11 +1,11 @@
 dataset: train_encoded.csv
 model: RandomForestRegressor
-timestamp: 2026-06-17T16:41:00
+timestamp: 2026-06-21T12:16:32
 num_samples: 1070
 num_features: 8
 MSE: 13866328.41204747
 RMSE: 3723.7519267598195
-MAE: 2055.249100850491
+MAE: 2055.2491008504903
 R2: 0.9039286326614179
 AMSE: 21878048.78191034
 best_params: {'max_depth': 8, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 200}

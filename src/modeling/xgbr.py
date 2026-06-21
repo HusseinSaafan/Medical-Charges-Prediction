@@ -1,4 +1,5 @@
 import os
+import pickle
 from pathlib import Path
 
 CONDA_LIBOMP = Path('/opt/anaconda3/lib')
@@ -12,6 +13,7 @@ if (CONDA_LIBOMP / 'libomp.dylib').exists():
 
 from xgboost import XGBRegressor
 
+from src.utils.config import PROJECT_ROOT, log
 from src.utils.helpers import (
     build_train_metrics_payload,
     compute_regression_metrics,
@@ -19,6 +21,17 @@ from src.utils.helpers import (
     run_stratified_grid_search,
     save_train_metrics,
 )
+
+MODELS_DIR = PROJECT_ROOT / "artifacts" / "models"
+
+
+def _save_model_pickle(model, filename: str) -> Path:
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    model_path = MODELS_DIR / filename
+    with model_path.open("wb") as file_obj:
+        pickle.dump(model, file_obj)
+    log("Saved model pickle to:", model_path)
+    return model_path
 
 
 def run_xgboost_regressor() -> dict:
@@ -60,6 +73,7 @@ def run_xgboost_regressor() -> dict:
     )
 
     save_train_metrics(payload, 'xgboost_regressor_train_metrics.txt')
+    model_path = _save_model_pickle(best_model, "xgbr.pkl")
 
     return {
         'model_key': 'xgbr',
@@ -68,6 +82,7 @@ def run_xgboost_regressor() -> dict:
         'AMSE': amse,
         'best_params': grid.best_params_,
         'train_metrics': payload,
+        'model_path': model_path,
     }
 
 
