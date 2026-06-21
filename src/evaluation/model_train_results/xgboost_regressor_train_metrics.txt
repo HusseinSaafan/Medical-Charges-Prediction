@@ -1,6 +1,6 @@
 dataset: train_encoded.csv
 model: XGBoostRegressor
-timestamp: 2026-06-21T12:17:08
+timestamp: 2026-06-21T12:31:15
 num_samples: 1070
 num_features: 8
 MSE: 16904878.31635203

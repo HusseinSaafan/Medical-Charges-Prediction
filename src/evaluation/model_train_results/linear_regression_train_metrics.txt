@@ -1,6 +1,6 @@
 dataset: train_encoded.csv
 model: LinearRegression
-timestamp: 2026-06-21T12:15:16
+timestamp: 2026-06-21T12:29:37
 num_samples: 1070
 num_features: 8
 MSE: 37277681.70201866
